@@ -8,8 +8,8 @@
   <p> Here's the user object </p>
   <pre> {{ user | json }} </pre>
 
-  <p *ngIf="privateData"> Here's some data fetched from a protected API </p>
-  <pre> {{ privateData | json }} </pre>
+  <p *ngIf="myData"> Here's some data fetched from a protected API </p>
+  <pre> {{ myData | json }} </pre>
 
   <button (click)="logout()"> Log Out </button>
   <button (click)="getPrivateData()"> Get private data </button>

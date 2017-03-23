@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 import { SessionService } from './session.service';
 
@@ -7,7 +7,7 @@ import { SessionService } from './session.service';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   title = 'app works!';
 
   loginInfo = {};
@@ -15,11 +15,27 @@ export class AppComponent {
 
   user: any;
   error: string;
+  myData: any;
 
   constructor(private mySession: SessionService) {}
 
+  ngOnInit() {
+    this.mySession.isLoggedIn()
+      .then(userInfo => this.user = userInfo);
+  }
+
   login() {
-    console.log('LOGIN');
+    const thePromise = this.mySession.login(this.loginInfo);
+
+    thePromise.then((userInfo) => {
+      this.user = userInfo;
+      this.error = null;
+    });
+
+    thePromise.catch((err) => {
+      this.user = null;
+      this.error = err;
+    });
   }
 
   signup() {
@@ -27,10 +43,30 @@ export class AppComponent {
 
     thePromise.then((userInfo) => {
       this.user = userInfo;
+      this.error = null;
     });
 
     thePromise.catch((err) => {
+      this.user = null;
       this.error = err;
     });
+  }
+
+  logout() {
+    this.mySession.logout()
+      .then(() => {
+        this.user = null;
+        this.error = null;
+      })
+      .catch(err => this.error = err);
+  }
+
+  getPrivateData() {
+    this.mySession.getPrivate()
+      .then((data) => {
+        this.myData = data;
+        this.error = null;
+      })
+      .catch(err => this.error = err);
   }
 }

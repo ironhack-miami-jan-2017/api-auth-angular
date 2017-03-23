@@ -23,6 +23,14 @@ export class AppComponent {
   }
 
   signup() {
-    console.log('SIGNUP');
+    const thePromise = this.mySession.signup(this.signupInfo);
+
+    thePromise.then((userInfo) => {
+      this.user = userInfo;
+    });
+
+    thePromise.catch((err) => {
+      this.error = err;
+    });
   }
 }

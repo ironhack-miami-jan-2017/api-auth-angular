@@ -1,3 +1,38 @@
-<h1>
-  {{title}}
-</h1>
+<h1> {{title}} </h1>
+
+<form class="login">
+  <h2> Log In </h2>
+
+  <div>
+    <label for="the-username-input"> Username </label>
+    <input type="text" name="username" [(ngModel)]="loginInfo.username" id="the-username-input">
+  </div>
+
+  <div>
+    <label for="the-password-input"> Password </label>
+    <input type="password" name="password" [(ngModel)]="loginInfo.password" id="the-password-input">
+  </div>
+
+  <button (click)="login()"> Log In </button>
+</form>
+
+<form class="signup">
+  <h2> Sign Up </h2>
+
+  <div>
+    <label for="the-nickname-signup"> Nickname </label>
+    <input type="text" name="nickname" [(ngModel)]="signupInfo.nickname" id="the-nickname-signup">
+  </div>
+
+  <div>
+    <label for="the-username-signup"> Username </label>
+    <input type="text" name="username" [(ngModel)]="signupInfo.username" id="the-username-signup">
+  </div>
+
+  <div>
+    <label for="the-password-signup"> Password </label>
+    <input type="password" name="password" [(ngModel)]="signupInfo.password" id="the-password-signup">
+  </div>
+
+  <button (click)="signup()"> Sign Up </button>
+</form>
